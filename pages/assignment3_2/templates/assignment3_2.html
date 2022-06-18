@@ -8,6 +8,11 @@
     {# --------------------------- search form ----------------------------#}
     <h1 class="header">Search User</h1>
 
+    {% if message == 'not found' %}
+        <h3 class="error">User Not Found</h3>
+    {% endif %}
+
+
     <form action="/assignment3_2" method="get">
         <input type="text" name="email" placeholder="Email"><br>
         <input type="submit" id="findUserBtn" value="Find User"><br><br><br>
@@ -15,7 +20,7 @@
 
 
     {% if email %}
-        <div id="userSearchResults">
+        <div id="userSearchResults" class="container">
             <h2>The User's Details:</h2>
             <h4>Username: {{ username }}</h4>
             <h4>Email: {{ email }}</h4>
@@ -27,21 +32,17 @@
 
     {% if users_details %}
         <div class="user_list">
-            <h2 class="header">Users Details:</h2>
-            {% for i in range(users_details | length) %}
+            {% for user in users_details %}
                 <div class="container">
-                    <h3>Username: {{ users_details[i]['name'] }}</h3>
-                    <h4>Email: {{ users_details[i]['email'] }}</h4>
-                    <h4>Password: {{ users_details[i]['password'] }}</h4>
+                    <h3>Username: {{ user.username }}</h3>
+                    <h4>Email: {{ user.email }}</h4>
+                    <h4>Password: {{ user.password }}</h4>
                 </div>
             {% endfor %}
         </div><br>
     {% endif %}
 
 
-    {% if message == 'not found' %}
-        <h3 class="error">User Not Found</h3>
-    {% endif %}
 
 
     {# ........................... end search form ........................#}
