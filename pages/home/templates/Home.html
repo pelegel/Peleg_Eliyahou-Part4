@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+
+{% block stylesheet %}
+    <script src="{{ url_for('home.static', filename='js/home.js') }}"></script>
+{% endblock %}
+
+
+{% block tohen %}
+
+    <header id="HeaderH" class="header">
+        <h1>Home</h1>
+    </header>
+
+    <div id="containerHome">
+
+
+        <p id="Welcome">
+            Welcome to the best music website!
+        </p>
+
+
+        <!-- Music add-in -->
+        <p id="enjoy">
+            Enjoy the music while you're in here :)
+        </p><br>
+
+        <audio id="audio" controls >
+            <source src="{{ url_for('home.static', filename='media/LetMeLoveYouInstrument.mp3') }}"
+                    type="audio/mp3">Your browser does not support the audio element.</audio><br>
+
+
+        <!-- Calculate music time -->
+        <div id="calcTime">
+            <p class="title">Calculate the average time you listen to music per day</p>
+            <label for="inputNum">Number Of Songs Played Per Day:</label><br><br>
+            <input id="inputNum" type="number" id="number" name="number" min="0" max="100"><br><br>
+            <button id="btn" onclick="calcTime()">Calculate</button><br>
+            <p id="result"></p>
+        </div>
+
+
+        <!-- Switching pics animation -->
+        <div id="img1" class="switching"><img src="{{ url_for('home.static', filename='media/spotify.jpg') }}" alt="spotify"></div>
+        <div id="img2" class="switching"><img src="{{ url_for('home.static', filename='media/youtube.jpg') }}" alt="youtube"></div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script defer src="{{ url_for('home.static', filename='js/home.js') }}"></script>
+{% endblock %}

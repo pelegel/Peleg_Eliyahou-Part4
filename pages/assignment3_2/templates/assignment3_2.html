@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Assignment3_2{% endblock %}
+
+{% block tohen %}
+
+
+
+    {# --------------------------- search form ----------------------------#}
+    <h1 class="header">Search User</h1>
+
+    <form action="/assignment3_2" method="get">
+        <input type="text" name="email" placeholder="Email"><br>
+        <input type="submit" id="findUserBtn" value="Find User"><br><br><br>
+    </form>
+
+
+    {% if email %}
+        <div id="userSearchResults">
+            <h2>The User's Details:</h2>
+            <h4>Username: {{ username }}</h4>
+            <h4>Email: {{ email }}</h4>
+            <h4>Password: {{ user_password }}</h4>
+        </div>
+
+    {% endif %}
+
+
+    {% if users_details %}
+        <div class="user_list">
+            <h2 class="header">Users Details:</h2>
+            {% for i in range(users_details | length) %}
+                <div class="container">
+                    <h3>Username: {{ users_details[i]['name'] }}</h3>
+                    <h4>Email: {{ users_details[i]['email'] }}</h4>
+                    <h4>Password: {{ users_details[i]['password'] }}</h4>
+                </div>
+            {% endfor %}
+        </div><br>
+    {% endif %}
+
+
+    {% if message == 'not found' %}
+        <h3 class="error">User Not Found</h3>
+    {% endif %}
+
+
+    {# ........................... end search form ........................#}
+
+
+
+    {# ------------------------ registration form -------------------------#}
+
+    {% if not session['loggedin'] %}
+
+        <h1 class="header">Log-In</h1>
+        {% if message and request.method == 'POST' %}
+            <h3 class="error">{{ message }}</h3>
+        {% endif %}
+
+
+        <form action="/assignment3_2" method="post">
+            <input type="text" name="username" placeholder="Username"><br>
+            <input type="text" name="password" placeholder="Password"><br>
+            <input type="submit" id="loginBtn" value="Log In"><br><br><br>
+        </form>
+
+
+    {% else %}
+        <form action="/logout/" method="post">
+            <button id="logoutBtb" class="button">Log Out</button>
+        </form>
+
+    {% endif %}
+
+
+
+    {# ....................... end registration form ......................#}
+
+
+
+{% endblock %}

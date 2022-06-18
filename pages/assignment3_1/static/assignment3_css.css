@@ -1,0 +1,46 @@
+
+/*grid areas - home */
+#Nav {
+    grid-area: Nav;
+}
+
+#HeaderH {
+    grid-area: HeaderH;
+}
+
+#audio {
+    grid-area: audio;
+    margin: 20px;
+}
+
+#enjoy {
+    grid-area: enjoy;
+}
+
+#inputNum {
+    display: inline-block;
+}
+
+#calcTime {
+    grid-area: calcTime;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#calcTitle {
+    font-weight: bold;
+}
+
+
+#switchingPics {
+    grid-area: switchingPics;
+}
+
+
+#Welcome {
+    grid-area: Welcome;
+    font-size: 150%;
+    font-weight: bold;
+
+}
+/*end grid areas - home*/

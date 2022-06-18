@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock %}
+
+
+{% block tohen %}
+
+
+    <header id="HeaderC" class="header">
+        <h1>Contact</h1>
+    </header>
+
+    <div id="containerContact">
+
+        <p id="titleCont" class="title">
+            We would like to keep in contact with you!
+        </p>
+
+        <!-- Contact form -->
+        <div id="formDiv">
+            <form name="contactForm" name="contactForm" onsubmit="submitForm(); return false;" method="post" >
+
+                <br>
+                <!-- name -->
+                <label for="FullName">* Full Name</label><br>
+                <input type="text" id="FullName" name="FullName" autocomplete="on" required><br><br>
+
+                <!-- email -->
+                <label for="email">* Email</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <!-- phone number -->
+                <label for="phone">Phone Number</label><br>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{7}"><br><br>
+
+                <!-- gender -->
+                <label for="gender">Gender</label><br>
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label><br><br>
+
+                <!-- birthday -->
+                <label for="birthdate">Birthdate</label><br>
+                <input type="date" id="birthdate" name="birthdate" max="2022-04-17"><br><br>
+
+                <!-- rate -->
+                <label for="range">Please Rate Us</label><br>
+                <input type="range" id="range" name="range" min="0" max="10"><br><br>
+
+                <!-- message -->
+                <label for="text">* What do you want to tell us?</label><br>
+                <input type="text" id="text" name="text" style="padding: 25px;" required><br><br>
+
+                <!-- agree to promotions -->
+                <label for="agree">I agree to send me promotion emails</label><br>
+                <input type='checkbox' id="agree" name='agree'><br><br>
+
+
+
+                <!-- submit form button -->
+                <input type="submit" id="btnSubmit" name="submit" value="Submit" /><br><br>
+
+                <p>* Mandatory fields</p>
+
+
+
+            </form><br>
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ url_for('contact.static', filename='js/contact.js') }}"></script>
+{% endblock %}

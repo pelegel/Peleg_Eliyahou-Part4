@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<!-- Title -->
+    <title>{% block title %}{% endblock %}</title>
+
+<!-- CSS -->
+    {% block stylesheet %}{% endblock %}
+    <link rel="stylesheet" href="static/css/css.css">
+    <link rel="stylesheet" href="static/css/alert.css">
+
+    <script defer src="static/js/javascript.js"></script>
+
+</head>
+<body>
+
+<div class="topHeader">
+    <img class= "banner-image" src="../static/media/MusixCover.png">
+</div>
+
+
+<!-- Header & Navigation bar -->
+<header>
+    <nav id="Nav" class="nav">
+        <a href="/">Home</a> |
+        <a href="/contact">Contact</a> |
+        <a href="/assignment3_1">Assignment3_1</a> |
+        <a href="/assignment3_2">Assignment3_2</a> |
+        <a href="/assignment4">Assignment4</a> |
+    </nav>
+
+    {% if session['loggedin'] %}
+        <p id="user_greeting">Welcome, {{ session['username'] | title() }}!</p><br>
+    {% endif %}
+</header>
+
+
+
+<!-- Alert -->
+    <div class="alert">
+        {%  with messages = get_flashed_messages(with_categories=true) %}
+            {%  if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        <span>{{ message }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+<!-- Content -->
+{% block tohen %}
+    <h3 id="base-message">Hope you will like it!</h3>
+{% endblock %}
+
+
+<!-- Footer -->
+<div class="footer">
+    <footer>
+        <p class="copyright">Musix © 2022</p>
+    </footer>
+</div>
+{% block javascript %}{% endblock %}
+
+</body>
+</html>
