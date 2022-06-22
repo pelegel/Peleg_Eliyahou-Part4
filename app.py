@@ -10,10 +10,10 @@ import requests
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 
-#
-# app.secret_key = '123'
-# app.config['SESSION_PERMANENT'] = True
-# app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
+
+app.secret_key = '123'
+app.config['SESSION_PERMANENT'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
 
 
 ###### Components
@@ -63,19 +63,6 @@ def outer_source_func():
 
 
 
-def save_users_to_session(users):
-    users_list_to_save = []
-    for user in users:
-        users_dict = {
-            'avatar': users['avatar'],
-            'first_name': users['first_name'],
-            'email': users['email'],
-        }
-        users_list_to_save.append(users_dict)
-    session['users'] = users_list_to_save
-
-
-
 
 def get_specific_user(id):
     users = []
@@ -98,6 +85,61 @@ def fetch_fe_func():
             session['user_id_fe'] = user_id
 
     return render_template('assignment4.html')
+
+
+
+
+
+
+def get_users_sync():
+    users = []
+    res = requests.get(f'https://reqres.in/api/users')
+    users_data = res.json()
+    user = users_data['data']
+    users.append(user)
+    return users
+
+
+
+def save_users_to_session(users, user_id):
+    user_to_save = []
+    users_data = users[0]
+    for user in users_data:
+        if user['id'] == user_id:
+            users_dict = {
+                'first_name': user['first_name'],
+                'email': user['email'],
+                'avatar': user['avatar']
+            }
+            user_to_save.append(users_dict)
+            print(user_to_save)
+
+    session['user'] = user_to_save
+
+
+
+
+
+@app.route('/fetch_be')
+def fetch_be_func():
+    session.clear()
+
+    if 'type' in request.args:
+        user_id = int(request.args['user_num_fetch_be'])
+        users = []
+
+        # SYNC
+        if request.args['type'] == 'sync':
+            users = get_users_sync()
+
+        save_users_to_session(users, user_id)
+
+    else:
+        session.clear()
+
+    print(session)
+    return render_template('assignment4.html')
+
 
 
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from utilities.db_manager import interact_db
 import requests
 
@@ -14,6 +14,7 @@ assignment4 = Blueprint('assignment4', __name__,
 #routes
 @assignment4.route('/assignment4')
 def assignment4_page():
+    session.clear()
     return render_template('assignment4.html')
 
 
