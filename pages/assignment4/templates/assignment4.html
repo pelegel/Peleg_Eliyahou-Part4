@@ -96,8 +96,21 @@
         {# ....................... end list of users form .....................#}
 
 
-    </div>
+        <div class="user_list">
+            <h2 class="header">Fetch - FrontEnd</h2>
+            <form action="/fetch_fe">
+                <input type="number" id="user_num_fetch_fe" min="0" max="6"><br><br><br>
+            </form>
 
+            <h3>User List: <button onclick="fetch_users_fe()">Click me</button></h3>
+            <main id="fetch_fe_results">
+
+            </main>
+
+        </div>
+
+
+    </div>
 
     {% block javascript %}
         <script src="{{ url_for('assignment4.static', filename='js/assignment4.js') }}"></script>

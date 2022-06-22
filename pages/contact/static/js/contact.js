@@ -18,6 +18,7 @@ function submitForm() {
   }
   else{
     window.alert("You have already submitted the form");
-  } 
+  }
+  document.getElementById("contact_value").innerHTML += contact;
 
 }

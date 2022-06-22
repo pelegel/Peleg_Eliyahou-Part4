@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from utilities.db_manager import interact_db
+import requests
+
 
 
 #assignment3_1 blueprint definition
@@ -13,6 +15,14 @@ assignment4 = Blueprint('assignment4', __name__,
 @assignment4.route('/assignment4')
 def assignment4_page():
     return render_template('assignment4.html')
+
+
+@assignment4.route('/assignment4/outer_source')
+def assignment4_outer_source_page():
+    return render_template('assignment4_outer_source.html')
+
+
+
 
 
 
