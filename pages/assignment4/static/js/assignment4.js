@@ -3,21 +3,14 @@ function fetch_users_fe() {
     fetch('https://reqres.in/api/users').then(
         response => response.json()
     ).then(
-        response => createUsersList(response.data)
+        response => get_user_fe(response.data)
     ).catch(
         err => console.log(err)
     );
-    // fetch('https://reqres.in/api/users?page=2').then(
-    //     response => response.json()
-    // ).then(
-    //     responseOBJECT => createUsersList(responseOBJECT.data)
-    // ).catch(
-    //     err => console.log(err)
-    // );
 }
 
 
-function createUsersList(response){
+function get_user_fe(response){
     const currMain = document.querySelector("main")
     const user_id = document.getElementById("user_num_fetch_fe").value;
     let i = 0;
