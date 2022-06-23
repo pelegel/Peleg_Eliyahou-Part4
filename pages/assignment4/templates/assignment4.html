@@ -126,8 +126,8 @@
             </form>
 
 
-            {% if session.user %}
-                {% for user in session.user %}
+            {% if session.searched_user %}
+                {% for user in session.searched_user %}
                     <img src="{{user.avatar}}" alt="Profile Picture"/>
                     <div>
                         <span>{{user.first_name}}</span>

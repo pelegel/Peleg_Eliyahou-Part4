@@ -114,7 +114,7 @@ def save_users_to_session(users, user_id):
             user_to_save.append(users_dict)
             print(user_to_save)
 
-    session['user'] = user_to_save
+    session['searched_user'] = user_to_save
 
 
 
@@ -122,7 +122,7 @@ def save_users_to_session(users, user_id):
 
 @app.route('/fetch_be')
 def fetch_be_func():
-    session.clear()
+    session['searched_user'] = ''
 
     if 'type' in request.args:
         user_id = int(request.args['user_num_fetch_be'])
@@ -135,7 +135,7 @@ def fetch_be_func():
         save_users_to_session(users, user_id)
 
     else:
-        session.clear()
+        session['searched_user'] = ''
 
     print(session)
     return render_template('assignment4.html')

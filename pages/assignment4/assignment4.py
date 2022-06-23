@@ -14,7 +14,7 @@ assignment4 = Blueprint('assignment4', __name__,
 #routes
 @assignment4.route('/assignment4')
 def assignment4_page():
-    session.clear()
+    session['searched_user'] = ''
     return render_template('assignment4.html')
 
 

@@ -48,7 +48,7 @@ def assignment3_2_page():
 
     #for log in
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
         query = "select username from users"
@@ -60,20 +60,22 @@ def assignment3_2_page():
         for user in usernames_list:
             usernames.append(user.username)
 
-        if username in usernames:
-            pas_in_dict = get_password_by_username(username)
+        if email in emails:
+            pas_in_dict = get_password_by_email(email)
+            username_in_dict = get_username_by_email(email)
+
             if pas_in_dict == password:
-                session['username'] = username
+                session['username'] = username_in_dict
                 session['loggedin'] = True
                 return render_template('assignment3_2.html',
                                        message='Logged in successfully!',
-                                       username=username)
+                                       username=username_in_dict)
             else:
                 return render_template('assignment3_2.html',
                                        message='Wrong password')
         else:
             return render_template('assignment3_2.html',
-                                   message='Incorrect username')
+                                   message='Incorrect email')
     return render_template('assignment3_2.html')
 
 
@@ -108,12 +110,12 @@ def get_password_by_email(email):
 
 
 
-def get_password_by_username(username):
-    query = "select password from users where username='%s';" % username
-    passwords = interact_db(query, query_type='fetch')
-    for user in passwords:
-        password = user.password
-    return password
+def get_username_by_email(email):
+    query = "select username from users where email='%s';" % email
+    usernames = interact_db(query, query_type='fetch')
+    for user in usernames:
+        username = user.username
+    return username
 
 
 
