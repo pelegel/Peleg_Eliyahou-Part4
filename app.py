@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, jsonify
 from flask import url_for
 from datetime import timedelta
 from flask import request, session, jsonify
@@ -7,6 +7,8 @@ import time
 import requests
 
 ###### App setup
+from utilities.db_manager import interact_db
+
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 
@@ -62,7 +64,7 @@ def outer_source_func():
 
 
 
-
+# ---------- Front-End -------------
 
 def get_specific_user(id):
     users = []
@@ -90,16 +92,25 @@ def fetch_fe_func():
 
 
 
+# ---------- JSON -------------
 
-def get_users_sync():
-    users = []
-    res = requests.get(f'https://reqres.in/api/users')
-    users_data = res.json()
-    user = users_data['data']
-    users.append(user)
-    return users
+@app.route('/users_json')
+def get_users_in_json():
+    users_list = select_users()
+    users_dict = {}
+    i = 0
+    for user in users_list:
+        i += 1
+        user_dict = {}
+        user_dict['email'] = user.email
+        user_dict['username'] = user.username
+        user_dict['password'] = user.password
+        users_dict[i] = user_dict
+    return jsonify(users_dict)
 
 
+
+# ---------- Back-End -------------
 
 def save_users_to_session(users, user_id):
     user_to_save = []
@@ -116,6 +127,15 @@ def save_users_to_session(users, user_id):
 
     session['searched_user'] = user_to_save
 
+
+
+def get_users_sync():
+    users = []
+    res = requests.get(f'https://reqres.in/api/users')
+    users_data = res.json()
+    user = users_data['data']
+    users.append(user)
+    return users
 
 
 
@@ -139,6 +159,19 @@ def fetch_be_func():
 
     print(session)
     return render_template('assignment4.html')
+
+
+
+
+
+
+#------------- Select All Users ---------------
+def select_users():
+    query = "select * from users"
+    users_list = interact_db(query, query_type='fetch')
+    return users_list
+
+
 
 
 
