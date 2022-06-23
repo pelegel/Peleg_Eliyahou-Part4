@@ -39,7 +39,7 @@ def assignment4_userss_page():
 
 
 
-#---------------------------------------------- ASSIGNMENT 4 - Part A---------------------------------------------------
+#---------------------------------------------- ASSIGNMENT 4 - Part A --------------------------------------------------
 
 #------------- Select All Users ---------------
 @assignment4.route('/select_users')
@@ -157,7 +157,7 @@ def update_user():
 
 
 
-#---------------------------------------------- ASSIGNMENT 4 - Part B---------------------------------------------------
+#---------------------------------------------- ASSIGNMENT 4 - Part B --------------------------------------------------
 
 #--------------------------------------------- ASSIGNMENT 4B - USERS ---------------------------------------------------
 
@@ -180,7 +180,7 @@ def get_users_in_json():
 
 
 
-#------------------------------------------ ASSIGNMENT 4B - OUTER SOURCE------------------------------------------------
+#------------------------------------------ ASSIGNMENT 4B - OUTER SOURCE -----------------------------------------------
 
 
 # ---------- Front-End -------------
@@ -244,12 +244,40 @@ def save_users_to_session(users, user_id):
 
 
 
+#---------------------------------------------- ASSIGNMENT 4 - Part C --------------------------------------------------
 
-
-
-
-
-
-
+@assignment4.route('/assignment4/restapi_users/', defaults={'user_id': -1})
+@assignment4.route('/assignment4/restapi_users/<int:user_id>', defaults={'orders': 'my orders'})
+@assignment4.route('/assignment4/restapi_users/<int:user_id>')
+def get_users_restapi_func(user_id):
+    if user_id == -1:
+        return_dict = {}
+        query = 'select * from users limit 1;'
+        users = interact_db(query=query, query_type='fetch')
+        return_dict = {
+            'status': 'success',
+            'id': users[0].user_id,
+            'name': users[0].username,
+            'email': users[0].email,
+            'password': users[0].password
+        }
+    else:
+        query = 'select * from users where user_id=%s;' % user_id
+        users = interact_db(query=query, query_type='fetch')
+        # print(type(user_id))
+        if len(users) == 0:
+            return_dict = {
+                'status': 'failed',
+                'message': 'user not found'
+            }
+        else:
+            return_dict = {
+                'status': 'success',
+                'id': users[0].user_id,
+                'name': users[0].username,
+                'email': users[0].email,
+                'password': users[0].password
+            }
+    return jsonify(return_dict)
 
 
