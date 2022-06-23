@@ -98,59 +98,6 @@
 
 
 
-        {# ----------------------- front end fetch form -----------------------#}
-
-        <div class="user_list">
-            <h2 class="header">Fetch - Front End</h2>
-            <form action="/fetch_fe">
-                <input type="number" id="user_num_fetch_fe" min="0" max="6"><br><br><br>
-            </form>
-
-            <h3>User List: <button onclick="fetch_users_fe()">Click me</button></h3>
-            <main id="fetch_fe_results"></main>
-        </div>
-
-        {# ...................... end front end fetch form ....................#}
-
-
-
-
-        {# ------------------------ back end fetch form -----------------------#}
-
-        <div class="user_list">
-            <h2 class="header">Fetch - Back End</h2>
-            <form action="/fetch_be" method="get">
-                <input type="number" id="user_num_fetch_be" name="user_num_fetch_be" min="1" max="6" required>
-                <input type="hidden" name="type" value="sync">
-                <input type="submit" value="Get User"><br><br><br>
-            </form>
-
-
-            {% if session.searched_user %}
-                {% for user in session.searched_user %}
-                    <img src="{{user.avatar}}" alt="Profile Picture"/>
-                    <div>
-                        <span>{{user.first_name}}</span>
-                        <br>
-                        <a href="mailto:{{user.email}}">Send Email</a>
-                    </div>
-
-                {% endfor %}
-            {% endif %}
-
-
-
-        </div>
-
-        {# ...................... end back end fetch form .....................#}
-
-
-
-
-        <form action="/users_json" method="get">
-            <input type="submit" value="users json"><br><br><br>
-        </form>
-
 
 
 
