@@ -247,7 +247,6 @@ def save_users_to_session(users, user_id):
 #---------------------------------------------- ASSIGNMENT 4 - Part C --------------------------------------------------
 
 @assignment4.route('/assignment4/restapi_users/', defaults={'user_id': -1})
-@assignment4.route('/assignment4/restapi_users/<int:user_id>', defaults={'orders': 'my orders'})
 @assignment4.route('/assignment4/restapi_users/<int:user_id>')
 def get_users_restapi_func(user_id):
     if user_id == -1:
