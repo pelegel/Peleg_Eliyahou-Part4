@@ -29,8 +29,7 @@ def assignment4_users_page():
 
 
 
-
-
+#--------------------------------------------- ASSIGNMENT 4 ---------------------------------------------------
 
 #------------- Select All Users ---------------
 @assignment4.route('/select_users')
@@ -150,6 +149,36 @@ def update_user():
 
 
 
+#---------------------------------------------- ASSIGNMENT 4 - USERS ---------------------------------------------------
+
+# ---------- JSON -------------
+
+@assignment4.route('/users_json')
+def get_users_in_json():
+    users_list = select_users_to_json()
+    users_dict = {}
+    i = 0
+    for user in users_list:
+        i += 1
+        user_dict = {}
+        user_dict['email'] = user.email
+        user_dict['username'] = user.username
+        user_dict['password'] = user.password
+        users_dict[i] = user_dict
+    return jsonify(users_dict)
+
+
+
+def select_users_to_json():
+    query = "select * from users"
+    users_list = interact_db(query, query_type='fetch')
+    return users_list
+
+
+
+
+#------------------------------------------- ASSIGNMENT 4 - OUTER SOURCE------------------------------------------------
+
 
 # ---------- Front-End -------------
 
@@ -175,24 +204,6 @@ def fetch_fe_func():
     return render_template('assignment4_outer_source.html')
 
 
-
-
-
-# ---------- JSON -------------
-
-@assignment4.route('/users_json')
-def get_users_in_json():
-    users_list = select_users_to_json()
-    users_dict = {}
-    i = 0
-    for user in users_list:
-        i += 1
-        user_dict = {}
-        user_dict['email'] = user.email
-        user_dict['username'] = user.username
-        user_dict['password'] = user.password
-        users_dict[i] = user_dict
-    return jsonify(users_dict)
 
 
 
@@ -249,11 +260,6 @@ def fetch_be_func():
 
 
 
-#------------- Select All Users ---------------
-def select_users_to_json():
-    query = "select * from users"
-    users_list = interact_db(query, query_type='fetch')
-    return users_list
 
 
 
