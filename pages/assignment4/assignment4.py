@@ -6,9 +6,9 @@ import requests
 
 #assignment3_1 blueprint definition
 assignment4 = Blueprint('assignment4', __name__,
-                 static_folder='static',
-                 static_url_path='/assignment4',
-                 template_folder='templates')
+                        static_folder='static',
+                        static_url_path='/assignment4',
+                        template_folder='templates')
 
 
 #routes
@@ -21,6 +21,11 @@ def assignment4_page():
 @assignment4.route('/assignment4/outer_source')
 def assignment4_outer_source_page():
     return render_template('assignment4_outer_source.html')
+
+
+@assignment4.route('/assignment4/users')
+def assignment4_users_page():
+    return render_template('assignment4_users.html')
 
 
 
