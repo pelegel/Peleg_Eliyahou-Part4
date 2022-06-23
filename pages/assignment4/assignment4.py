@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, redirect, flash, request, session, jsonify
+from flask import render_template, redirect,  url_for
+from flask import Blueprint, flash, request, session, jsonify
 from utilities.db_manager import interact_db
 import requests
 
@@ -22,12 +23,15 @@ def outer_source_func():
     session['searched_user'] = ''
     return render_template('assignment4_outer_source.html')
 
-
+#------------- users page navigating to json ---------------
 @assignment4.route('/assignment4/users')
 def assignment4_users_page():
     return render_template('assignment4_users.html')
 
-
+#------------- directly to json ---------------
+@assignment4.route('/assignment4/userss')
+def assignment4_userss_page():
+    return redirect(url_for('assignment4.get_users_in_json'))
 
 #--------------------------------------------- ASSIGNMENT 4 ---------------------------------------------------
 
