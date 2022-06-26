@@ -90,9 +90,19 @@ def insert_user():
     email = request.form['email']
     password = request.form['password']
 
+    query = "select email from users"
+    emails_list = interact_db(query, query_type='fetch')
+    emails = []
+    for user in emails_list:
+        emails.append(user.email)
+
+
     #not all details was provided
     if username == "" or email == "" or password == "":
         flash('Insertion Warning: Please fill all the user details', 'warning')
+
+    elif email in emails:
+        flash('Insertion Warning: This email is already taken', 'danger')
 
     #password too short
     elif len(password) < 8:
