@@ -18,10 +18,6 @@ app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
 
 
-###### Components
-## menu
-from components.menu.menu import menu
-app.register_blueprint(menu)
 
 
 # root of our website

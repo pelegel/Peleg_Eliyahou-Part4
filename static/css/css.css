@@ -351,5 +351,9 @@ a:hover {
     font-size: 25px;
 }
 
-
+#userRecommendation {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
 
