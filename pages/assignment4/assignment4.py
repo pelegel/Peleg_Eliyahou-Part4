@@ -23,16 +23,6 @@ def outer_source_func():
     session['searched_user'] = ''
     return render_template('assignment4_outer_source.html')
 
-# ------------- directly to json ---------------
-# @assignment4.route('/assignment4/users')
-# def assignment4_users_page():
-#     return redirect(url_for('assignment4.get_users_in_json'))
-
-#------------- users page navigating to json ---------------
-@assignment4.route('/assignment4/userss')
-def assignment4_userss_page():
-    return render_template('assignment4_users.html')
-
 
 
 
@@ -177,14 +167,13 @@ def get_users_in_json():
     query = "select * from users"
     users_list = interact_db(query, query_type='fetch')
     users_dict = {}
-    i = 0
     for user in users_list:
-        i += 1
         user_dict = {}
+        user_id = user.user_id
         user_dict['email'] = user.email
         user_dict['username'] = user.username
         user_dict['password'] = user.password
-        users_dict[i] = user_dict
+        users_dict[user_id] = user_dict
     return jsonify(users_dict)
 
 
