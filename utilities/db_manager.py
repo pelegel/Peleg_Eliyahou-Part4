@@ -6,10 +6,12 @@ import mysql.connector
 # ------------------------------------------------- #
 def interact_db(query, query_type: str):
     return_value = False
-    connection = mysql.connector.connect(host='localhost',
-                                         user='root',
-                                         passwd='Peleg280597',
-                                         database='db')
+
+    #change the below parameters to your own db credentials
+    connection = mysql.connector.connect(host='',
+                                         user='',
+                                         passwd='',
+                                         database='')
     cursor = connection.cursor(named_tuple=True)
     cursor.execute(query)
 
