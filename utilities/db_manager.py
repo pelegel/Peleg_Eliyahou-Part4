@@ -1,17 +1,17 @@
 import mysql.connector
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # ------------------------------------------------- #
 # ------------- DATABASE CONNECTION --------------- #
 # ------------------------------------------------- #
+from settings import DB
+
+
 def interact_db(query, query_type: str):
     return_value = False
-
-    #change the below parameters to your own db credentials
-    connection = mysql.connector.connect(host='',
-                                         user='',
-                                         passwd='',
-                                         database='')
+    connection = mysql.connector.connect(**DB)
     cursor = connection.cursor(named_tuple=True)
     cursor.execute(query)
 
